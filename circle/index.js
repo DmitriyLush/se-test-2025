@@ -18,7 +18,7 @@ function init() {
         redraw(coordinates) {
             this.context.canvas.width = window.innerWidth;
             this.context.canvas.height = window.innerHeight;
-          //  console.log(window.innerWidth + ',' + window.innerHeight);
+            //  console.log(window.innerWidth + ',' + window.innerHeight);
 
             const centerX = this.context.canvas.width / 2;
             const centerY = this.context.canvas.height / 2;
@@ -49,8 +49,13 @@ function init() {
      * @returns {number[]} - Coordinates in Array
      */
     function getCoordinates(time) {
-        // TODO: implement body of this function
-        return [0.0, 1.0];
+        const period = 5
+        const angle = (2 * Math.PI * time) / period
+
+        const x = Math.cos(angle)
+        const y = Math.sin(angle)
+
+        return [x, y]
     }
 
     /**

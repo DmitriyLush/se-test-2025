@@ -7,19 +7,39 @@
  * 4. Count of words.
  * @param {object} event - Event class
  */
-function onStatisticsClicked(event) {
-    //TODO: Implement this function
-    console.log('onStatisticsClicked called');
+function onStatisticsClicked() {
+    const text = document.getElementById('text').value
+
+    const valCharCount = text.length
+    const valSpacesCount = (text.match(/ /g) || []).length
+    const valVowelsCount = (text.match(/[aeiou]/gi) || []).length
+    const valConsonantsCount = (text.match(/[bcdfghjklmnpqrstvwxyz]/gi) || []).length
+    const valWordsCount = text.trim().split(/\s+/).length || 0
+
+    document.getElementById('valCharCount').value = valCharCount
+    document.getElementById('valSpacesCount').value = valSpacesCount
+    document.getElementById('valVowelsCount').value = valVowelsCount
+    document.getElementById('valConsonantsCount').value = valConsonantsCount
+    document.getElementById('valWordsCount').value = valWordsCount
+}
+
+function removeEvenWords(text) {
+    return text
+        .trim()
+        .split(/\s+/)
+        .filter((_, idx) => idx % 2 === 0)
+        .join(" ")
 }
 
 /**
- * Event handler for 'Statistics' button.
+ * Event handler for 'Remove even words' button.
  * Removes all the even words in the given text (starting from 1) and displays result in corresponding field.
  * @param {object} event - Event class
  */
-function onRemoveWordsClicked(event) {
-    //TODO: Implement this function
-    console.log('onRemoveWordsClicked called');
+function onRemoveWordsClicked() {
+    const text = document.getElementById('text').value
+
+    document.getElementById('valOddWords').value = removeEvenWords(text)
 }
 
 
@@ -27,7 +47,15 @@ function onRemoveWordsClicked(event) {
 
 function init() {
     const text = document.getElementById('text');
+    const btnStatistics = document.getElementById('statistics')
+    const btnRemoveWords = document.getElementById('removewords')
+
     text.value = txt;
+
+    btnStatistics.addEventListener('click', onStatisticsClicked)
+    btnRemoveWords.addEventListener('click', onRemoveWordsClicked)
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+
